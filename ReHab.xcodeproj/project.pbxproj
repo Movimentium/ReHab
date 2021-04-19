@@ -20,6 +20,7 @@
 		0CDC0043262E0C8000170535 /* LandingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0042262E0C8000170535 /* LandingPresenter.swift */; };
 		0CDC0049262E0E8F00170535 /* BudgetsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0048262E0E8F00170535 /* BudgetsListPresenter.swift */; };
 		0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC004D262E16B000170535 /* NewBudgetPresenter.swift */; };
+		0CDC0054262E1A2300170535 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0053262E1A2300170535 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		0CDC0042262E0C8000170535 /* LandingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPresenter.swift; sourceTree = "<group>"; };
 		0CDC0048262E0E8F00170535 /* BudgetsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsListPresenter.swift; sourceTree = "<group>"; };
 		0CDC004D262E16B000170535 /* NewBudgetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBudgetPresenter.swift; sourceTree = "<group>"; };
+		0CDC0053262E1A2300170535 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				0CDC000B262E01BA00170535 /* AppDelegate.swift */,
 				0CDC000D262E01BA00170535 /* SceneDelegate.swift */,
+				0CDC0053262E1A2300170535 /* Model.swift */,
 				0CDC0051262E16BD00170535 /* NewBudget Module */,
 				0CDC004B262E0F9500170535 /* BudgetsList Module */,
 				0CDC0046262E0E6C00170535 /* Landing Module */,
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CDC0054262E1A2300170535 /* Model.swift in Sources */,
 				0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */,
 				0CDC0037262E0B4300170535 /* LandingVC.swift in Sources */,
 				0CDC0049262E0E8F00170535 /* BudgetsListPresenter.swift in Sources */,
