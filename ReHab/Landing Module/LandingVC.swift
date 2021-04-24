@@ -14,6 +14,9 @@ class LandingVC: UIViewController, LandingViewInterface {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewInterface = self
+        
+        
+    
 
     }
     

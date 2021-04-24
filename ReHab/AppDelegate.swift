@@ -11,9 +11,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    let apiDataProv = APIDataProvider()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        apiDataProv.printer = Printer()
+//        apiDataProv.getData(forEndPoint: .categoryList) { (data:Data?, error:Error?) in
+//            print(data ?? "NO data")
+//        } 
+        apiDataProv.getData(forEndPoint: .subCategoryList(idCat: "001-2")) { (data:Data?, error:Error?) in
+            print(data ?? "NO data")
+        }
+        
         return true
     }
 
