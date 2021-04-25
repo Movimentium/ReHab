@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+*/
+
+"name" = "Nombre";
+"email" = "E-mail";
+"phone" = "Teléfono";
+"subCategory" = "Subcategoría";
+"location" = "Localización";
+"descrip" = "Descripción";
