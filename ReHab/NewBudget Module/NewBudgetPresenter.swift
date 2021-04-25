@@ -70,7 +70,7 @@ class NewBudgetPresenter {
     
     func category(at i:Int) -> String {
         let subCategory = arrCategories[i]
-        return subCategory.name
+        return subCategory.descrip
     }
     
     func didSelectCategory(at i:Int) {
@@ -84,8 +84,7 @@ class NewBudgetPresenter {
     
     func location(at i:Int) -> String {
         let loc = arrLocations[i]
-        let strLocation: String = "\(loc.zip) - \(loc.name)"
-        return strLocation
+        return loc.descrip
     }
     
     func didSelectLocation(at i:Int) {

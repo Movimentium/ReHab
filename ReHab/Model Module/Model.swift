@@ -35,14 +35,14 @@ class CategoryApiResp: Codable {
 
 class Budget: Codable, Stringnable {
     var descrip: String = ""
-    var subCategoryId: String = ""
+    var subCategory: SubCategory
     var name: String = ""
     var email: String = ""
     var phoneNumber: String = ""
-    var locationId: Int = 0
+    var location: Location
 }
 
-class SubCategory: Codable, Stringnable {
+class SubCategory: Codable, Stringnable, Descriptable {
     var id: String
     var name: String
     
@@ -50,9 +50,13 @@ class SubCategory: Codable, Stringnable {
         self.id = id
         self.name = name
     }
+    
+    var descrip: String {
+        return name
+    }
 }
 
-class Location: Codable, Stringnable {
+class Location: Codable, Stringnable, Descriptable {
     var id: Int
     var name: String
     var zip: String
@@ -62,4 +66,9 @@ class Location: Codable, Stringnable {
         self.name = name
         self.zip = zip
     }
+    
+    var descrip: String {
+        return "\(zip) - \(name)"
+    }
+
 }

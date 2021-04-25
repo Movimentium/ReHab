@@ -12,11 +12,10 @@ protocol BudgetsListViewInterface: AnyObject {
 }
 
 class BudgetsListPresenter {
+    
     weak var viewInterface: BudgetsListViewInterface?
     
-    
-    
-    
+        
     func onBtnNewBudget() {
         viewInterface?.goToNewBudgetVC()
     }
