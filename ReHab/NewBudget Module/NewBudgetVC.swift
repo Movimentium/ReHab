@@ -7,8 +7,10 @@
 
 import UIKit
 
-class NewBudgetVC: UIViewController, NewBudgetViewInterface {
-   
+class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSource, UIPickerViewDelegate
+{
+ 
+    
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
@@ -23,15 +25,22 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface {
     @IBOutlet weak var txtLocation: UITextField!
     @IBOutlet weak var txtVwDescrip: UITextView!
     
+    private var pickerSubCategory = UIPickerView()
+    private var pickerLocation = UIPickerView()
+
     private let presenter = NewBudgetPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewInterface = self
         setupUI()
+        setupPickers()
+        didLoadDataForForm()
     }
     
     private func setupUI() {
+        
+        // Strings
         lblName.text = "name".localized()
         lblEmail.text = "email".localized()
         lblPhone.text = "phone".localized()
@@ -65,13 +74,80 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface {
      }
      */
     
-    
+
+
     // MARK: - NewBudgetViewInterface
-    func nada() {
-         
+    func didLoadDataForForm() {
+        pickerSubCategory.dataSource = self
+        pickerSubCategory.delegate = self
+        pickerLocation.dataSource = self
+        pickerLocation.delegate = self
     }
     
+    // MARK: - UIPickerView methods
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == pickerSubCategory {
+            return presenter.numberOfCategories
+        } else {
+            return presenter.numberOfLocations
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == pickerSubCategory {
+            return presenter.category(at: row)
+        } else {
+            return presenter.location(at: row)
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == pickerSubCategory {
+            return presenter.didSelectCategory(at: row)
+        } else {
+            return presenter.didSelectLocation(at: row)
+        }
+    }
+    
+    private func setupPickers() {
+        let toolBar = UIToolbar()
+        toolBar.isTranslucent = false
+        toolBar.backgroundColor = .white
+        toolBar.tintColor = .habOrange
+        let btnDone = UIBarButtonItem(title: "ok".localized(),
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(onBtnPickerDone))
+        let btnSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                       target: nil, action: nil)
+        toolBar.items = [btnSpace, btnDone]
+        toolBar.sizeToFit()
+        pickerLocation.backgroundColor = .habOrangeLite
+        pickerSubCategory.backgroundColor = .habOrangeLite
+        txtSubCategory.inputView = pickerSubCategory
+        txtSubCategory.inputAccessoryView = toolBar
+        txtLocation.inputView = pickerLocation
+        txtLocation.inputAccessoryView = toolBar
+    }
+
+    @objc private func onBtnPickerDone() {
+        if txtSubCategory.isEditing {
+            let i = pickerSubCategory.selectedRow(inComponent: 0)
+            presenter.didSelectCategory(at: i)
+            txtSubCategory.text = presenter.category(at: i)
+            txtSubCategory.resignFirstResponder()
+        }
+        else if txtLocation.isEditing {
+            let i = pickerLocation.selectedRow(inComponent: 0)
+            presenter.didSelectLocation(at: i)
+            txtLocation.text = presenter.location(at: i)
+            txtLocation.resignFirstResponder()
+        }
+    }
 
     
-
 }

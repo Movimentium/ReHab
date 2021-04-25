@@ -2,9 +2,11 @@
   Localizable.strings
 */
 
+// NewBudget Module
 "name" = "Nombre";
 "email" = "E-mail";
 "phone" = "Teléfono";
 "subCategory" = "Subcategoría";
 "location" = "Localización";
 "descrip" = "Descripción";
+"ok" = "Ok";

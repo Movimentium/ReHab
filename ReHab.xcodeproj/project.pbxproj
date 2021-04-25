@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C37FDB1263592EA00AAA7E6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C37FDB0263592EA00AAA7E6 /* UIColorExtension.swift */; };
 		0C462E682634B2BE00C41109 /* APIDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C462E672634B2BE00C41109 /* APIDataProvider.swift */; };
 		0C462E6B2634C75C00C41109 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C462E6A2634C75B00C41109 /* Printer.swift */; };
 		0C462E702634C89F00C41109 /* Stringnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C462E6F2634C89F00C41109 /* Stringnable.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C37FDB0263592EA00AAA7E6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0C462E672634B2BE00C41109 /* APIDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataProvider.swift; sourceTree = "<group>"; };
 		0C462E6A2634C75B00C41109 /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 		0C462E6F2634C89F00C41109 /* Stringnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stringnable.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				0C462E6A2634C75B00C41109 /* Printer.swift */,
 				0C462E6F2634C89F00C41109 /* Stringnable.swift */,
 				0C462E8E2634E64800C41109 /* StringExtension.swift */,
+				0C37FDB0263592EA00AAA7E6 /* UIColorExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CDC0054262E1A2300170535 /* Model.swift in Sources */,
+				0C37FDB1263592EA00AAA7E6 /* UIColorExtension.swift in Sources */,
 				0C462E702634C89F00C41109 /* Stringnable.swift in Sources */,
 				0C462E6B2634C75C00C41109 /* Printer.swift in Sources */,
 				0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */,
