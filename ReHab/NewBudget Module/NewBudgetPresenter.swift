@@ -9,40 +9,58 @@ import UIKit
 
 protocol NewBudgetViewInterface: AnyObject {
     func didLoadDataForForm()
+    func showErrorLoadingAndExit()
+    func setUserInterationEnabled(_ isEnabled:Bool)
 }
 
 class NewBudgetPresenter {
-    /*
-     private func setupInputViews() {
-         
-         let toolBar = UIToolbar()
-         toolBar.isTranslucent = false
-         toolBar.backgroundColor = .white
-         toolBar.tintColor = K.Color.navBarTitle
-         let btnDone = UIBarButtonItem(title: "done".localized(), style: .done, target: self, action: #selector(onBtnDone))
-         let btnSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-         toolBar.items = [btnSpace,btnDone]
-         toolBar.sizeToFit()
-         
-         txtInvisibleBirthMom.inputView = momDatePicker
-         txtInvisibleBirthDad.inputView = dadDatePicker
-         txtInvisibleBirthMom.inputAccessoryView = toolBar
-         txtInvisibleBirthDad.inputAccessoryView = toolBar
-     }
 
-     */
-
-    weak var viewInterface: NewBudgetViewInterface?
+    private weak var viewInterface: NewBudgetViewInterface?
+    private let dataProvider: ModelDataProviderProtocol
+    private let catId = "001-2" // Reformas
     
-    private var arrCategories: [String] = ["A","B", "C"]
-    private var arrLocations: [String] = ["X","Y", "Z"]
+    private var arrCategories: [SubCategory] = []
+    private var arrLocations: [Location] = []
     
     private var idxCategorySelected: Int?
     private var idxLocationSelected: Int?
     
-    init() {
-       // viewInterface?.didLoadDataForForm()
+    
+    init(withViewInterface viewInterface: NewBudgetViewInterface, dataProv: ModelDataProviderProtocol) {
+        self.viewInterface = viewInterface
+        self.dataProvider = dataProv
+        self.viewInterface?.setUserInterationEnabled(false)
+        loadSubCategories()
     }
+    
+    private func loadSubCategories() {
+        dataProvider.getSubCategories(forParentId: catId) { [weak self] (arr:[SubCategory]) in
+            if arr.isEmpty {
+                DispatchQueue.main.async {
+                    self?.viewInterface?.showErrorLoadingAndExit()
+                }
+            } else {
+                self?.arrCategories = arr
+                self?.loadLocations()
+            }
+        }
+    }
+    
+    private func loadLocations() {
+        dataProvider.getLocations { [weak self] (arr:[Location]) in
+            DispatchQueue.main.async {
+                if arr.isEmpty {
+                    self?.viewInterface?.showErrorLoadingAndExit()
+                } else {
+                    self?.arrLocations = arr
+                    self?.viewInterface?.setUserInterationEnabled(true)
+                    self?.viewInterface?.didLoadDataForForm()
+                }
+            }
+        }
+    }
+    
+    
     
     
     // MARK: - Category methods
@@ -51,7 +69,8 @@ class NewBudgetPresenter {
     }
     
     func category(at i:Int) -> String {
-        return arrCategories[i]
+        let subCategory = arrCategories[i]
+        return subCategory.name
     }
     
     func didSelectCategory(at i:Int) {
@@ -64,7 +83,9 @@ class NewBudgetPresenter {
     }
     
     func location(at i:Int) -> String {
-        return arrLocations[i]
+        let loc = arrLocations[i]
+        let strLocation: String = "\(loc.zip) - \(loc.name)"
+        return strLocation
     }
     
     func didSelectLocation(at i:Int) {

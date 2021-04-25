@@ -10,3 +10,5 @@
 "location" = "Localización";
 "descrip" = "Descripción";
 "ok" = "Ok";
+"save" = "Guardar";
+"newBudget" = "Nuevo presupuesto";

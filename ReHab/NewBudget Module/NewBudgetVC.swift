@@ -9,8 +9,12 @@ import UIKit
 
 class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSource, UIPickerViewDelegate
 {
- 
+
+
     
+    @IBOutlet weak var vwMsg: UIView!
+    @IBOutlet weak var lblMsg: UILabel!
+
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
@@ -25,22 +29,34 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     @IBOutlet weak var txtLocation: UITextField!
     @IBOutlet weak var txtVwDescrip: UITextView!
     
+    @IBOutlet weak var constrFormTop: NSLayoutConstraint!
+    @IBOutlet weak var constrVwMsgTop: NSLayoutConstraint!
+    @IBOutlet weak var constrVwMsgHeight: NSLayoutConstraint!
+
+    private let btnSave = UIBarButtonItem(title: "save".localized(),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(onBtnSave))
     private var pickerSubCategory = UIPickerView()
     private var pickerLocation = UIPickerView()
 
-    private let presenter = NewBudgetPresenter()
+    private var presenter: NewBudgetPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewInterface = self
         setupUI()
         setupPickers()
-        didLoadDataForForm()
+        presenter = NewBudgetPresenter(withViewInterface: self,
+                                       dataProv: ModelDataProvider())
     }
     
     private func setupUI() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationItem.rightBarButtonItem = btnSave
+        constrVwMsgTop.constant = -constrVwMsgHeight.constant
         
         // Strings
+        title = "newBudget".localized()
         lblName.text = "name".localized()
         lblEmail.text = "email".localized()
         lblPhone.text = "phone".localized()
@@ -75,14 +91,29 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
      */
     
 
+    // MARK: - IBActions
+    @objc private func onBtnSave() {
+    
+    }
+
+    
 
     // MARK: - NewBudgetViewInterface
+    func setUserInterationEnabled(_ isEnabled: Bool) {
+          view.isUserInteractionEnabled = isEnabled
+    }
+    
     func didLoadDataForForm() {
         pickerSubCategory.dataSource = self
         pickerSubCategory.delegate = self
         pickerLocation.dataSource = self
         pickerLocation.delegate = self
     }
+    
+    func showErrorLoadingAndExit() {
+         
+    }
+    
     
     // MARK: - UIPickerView methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
