@@ -1,6 +1,7 @@
 /*
   Localizable.strings
 */
+"budgets" = "Presupuestos";
 
 // NewBudget Module
 "name" = "Nombre";

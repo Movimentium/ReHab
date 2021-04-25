@@ -8,9 +8,16 @@
 import UIKit
 
 protocol BudgetsListViewInterface: AnyObject {
-    func nada()
+    func goToNewBudgetVC()
 }
 
 class BudgetsListPresenter {
     weak var viewInterface: BudgetsListViewInterface?
+    
+    
+    
+    
+    func onBtnNewBudget() {
+        viewInterface?.goToNewBudgetVC()
+    }
 }

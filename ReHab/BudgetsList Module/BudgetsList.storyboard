@@ -1,7 +1,78 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v1Y-oP-M2f">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="VIy-3e-HIn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v1Y-oP-M2f" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="B4h-YF-4R3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.96470588239999999" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="1" green="0.45098039220000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.99607843139999996" green="0.96470588239999999" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vVq-S4-2pE" kind="relationship" relationship="rootViewController" id="igT-27-wl4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wVv-G7-GtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50" y="91"/>
+        </scene>
+        <!--Presupuestos-->
+        <scene sceneID="REi-Ic-9jh">
+            <objects>
+                <viewController storyboardIdentifier="BudgetsListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vVq-S4-2pE" customClass="BudgetsListVC" customModule="ReHab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xcg-vL-DSU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iIj-WQ-YkZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2gK-pd-o6Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2gK-pd-o6Y" firstAttribute="bottom" secondItem="iIj-WQ-YkZ" secondAttribute="bottom" id="6zE-hv-dot"/>
+                            <constraint firstItem="iIj-WQ-YkZ" firstAttribute="top" secondItem="2gK-pd-o6Y" secondAttribute="top" id="Ago-bz-Mkh"/>
+                            <constraint firstItem="2gK-pd-o6Y" firstAttribute="trailing" secondItem="iIj-WQ-YkZ" secondAttribute="trailing" id="SIt-Cu-Xpg"/>
+                            <constraint firstItem="iIj-WQ-YkZ" firstAttribute="leading" secondItem="2gK-pd-o6Y" secondAttribute="leading" id="TRD-kz-D8s"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Presupuestos" id="e0z-Ec-dZ5">
+                        <barButtonItem key="backBarButtonItem" title=" " id="dge-pn-bBz"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="YDJ-Tp-2dj">
+                            <connections>
+                                <action selector="onBtnNewBudget:" destination="vVq-S4-2pE" id="c0g-jF-Jg7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnNewBudget" destination="e0z-Ec-dZ5" id="jAS-vP-U0q"/>
+                        <outlet property="table" destination="iIj-WQ-YkZ" id="wLH-qf-d2t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MM3-0f-ufN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="794" y="90"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

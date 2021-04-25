@@ -11,7 +11,7 @@
         <!--New BudgetVC-->
         <scene sceneID="huk-38-vgz">
             <objects>
-                <viewController id="slc-h6-UNo" customClass="NewBudgetVC" customModule="ReHab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewBudgetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="slc-h6-UNo" customClass="NewBudgetVC" customModule="ReHab" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SNE-CG-lNW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

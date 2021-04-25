@@ -20,12 +20,9 @@
 		0CDC0015262E01BA00170535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC0014262E01BA00170535 /* Assets.xcassets */; };
 		0CDC0024262E023500170535 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC0023262E023500170535 /* LaunchScreen.storyboard */; };
 		0CDC0030262E09F200170535 /* BudgetsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC002F262E09F200170535 /* BudgetsListVC.swift */; };
-		0CDC0034262E0B3000170535 /* Landing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC0033262E0B3000170535 /* Landing.storyboard */; };
-		0CDC0037262E0B4300170535 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0036262E0B4300170535 /* LandingVC.swift */; };
 		0CDC003A262E0BA800170535 /* NewBudgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0039262E0BA800170535 /* NewBudgetVC.swift */; };
 		0CDC003D262E0BBE00170535 /* BudgetsList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC003C262E0BBE00170535 /* BudgetsList.storyboard */; };
 		0CDC0040262E0BEA00170535 /* NewBudget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC003F262E0BEA00170535 /* NewBudget.storyboard */; };
-		0CDC0043262E0C8000170535 /* LandingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0042262E0C8000170535 /* LandingPresenter.swift */; };
 		0CDC0049262E0E8F00170535 /* BudgetsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0048262E0E8F00170535 /* BudgetsListPresenter.swift */; };
 		0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC004D262E16B000170535 /* NewBudgetPresenter.swift */; };
 		0CDC0054262E1A2300170535 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC0053262E1A2300170535 /* Model.swift */; };
@@ -48,12 +45,9 @@
 		0CDC0019262E01BA00170535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CDC0023262E023500170535 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CDC002F262E09F200170535 /* BudgetsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsListVC.swift; sourceTree = "<group>"; };
-		0CDC0033262E0B3000170535 /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
-		0CDC0036262E0B4300170535 /* LandingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		0CDC0039262E0BA800170535 /* NewBudgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBudgetVC.swift; sourceTree = "<group>"; };
 		0CDC003C262E0BBE00170535 /* BudgetsList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BudgetsList.storyboard; sourceTree = "<group>"; };
 		0CDC003F262E0BEA00170535 /* NewBudget.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewBudget.storyboard; sourceTree = "<group>"; };
-		0CDC0042262E0C8000170535 /* LandingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPresenter.swift; sourceTree = "<group>"; };
 		0CDC0048262E0E8F00170535 /* BudgetsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsListPresenter.swift; sourceTree = "<group>"; };
 		0CDC004D262E16B000170535 /* NewBudgetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBudgetPresenter.swift; sourceTree = "<group>"; };
 		0CDC0053262E1A2300170535 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -95,6 +89,7 @@
 		0C462E912634E67900C41109 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CDC0023262E023500170535 /* LaunchScreen.storyboard */,
 				0C91E5A12634EE2800378F5F /* Localizable.strings */,
 				0CDC0014262E01BA00170535 /* Assets.xcassets */,
 			);
@@ -118,22 +113,10 @@
 				0C37FDB32635AD2D00AAA7E6 /* Model Module */,
 				0CDC0051262E16BD00170535 /* NewBudget Module */,
 				0CDC004B262E0F9500170535 /* BudgetsList Module */,
-				0CDC0046262E0E6C00170535 /* Landing Module */,
 				0C462E912634E67900C41109 /* Resources */,
 				0CDC0019262E01BA00170535 /* Info.plist */,
 			);
 			path = ReHab;
-			sourceTree = "<group>";
-		};
-		0CDC0046262E0E6C00170535 /* Landing Module */ = {
-			isa = PBXGroup;
-			children = (
-				0CDC0042262E0C8000170535 /* LandingPresenter.swift */,
-				0CDC0036262E0B4300170535 /* LandingVC.swift */,
-				0CDC0033262E0B3000170535 /* Landing.storyboard */,
-				0CDC0023262E023500170535 /* LaunchScreen.storyboard */,
-			);
-			path = "Landing Module";
 			sourceTree = "<group>";
 		};
 		0CDC004B262E0F9500170535 /* BudgetsList Module */ = {
@@ -221,7 +204,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CDC0034262E0B3000170535 /* Landing.storyboard in Resources */,
 				0C91E5A52634EE8900378F5F /* Localizable.strings in Resources */,
 				0CDC0015262E01BA00170535 /* Assets.xcassets in Resources */,
 				0CDC0024262E023500170535 /* LaunchScreen.storyboard in Resources */,
@@ -243,14 +225,12 @@
 				0C462E702634C89F00C41109 /* Stringnable.swift in Sources */,
 				0C462E6B2634C75C00C41109 /* Printer.swift in Sources */,
 				0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */,
-				0CDC0037262E0B4300170535 /* LandingVC.swift in Sources */,
 				0C462E682634B2BE00C41109 /* APIDataProvider.swift in Sources */,
 				0C37FDBA2635AFBD00AAA7E6 /* ModelDataProvider.swift in Sources */,
 				0CDC0049262E0E8F00170535 /* BudgetsListPresenter.swift in Sources */,
 				0CDC000C262E01BA00170535 /* AppDelegate.swift in Sources */,
 				0CDC003A262E0BA800170535 /* NewBudgetVC.swift in Sources */,
 				0CDC000E262E01BA00170535 /* SceneDelegate.swift in Sources */,
-				0CDC0043262E0C8000170535 /* LandingPresenter.swift in Sources */,
 				0C462E8F2634E64800C41109 /* StringExtension.swift in Sources */,
 				0CDC0030262E09F200170535 /* BudgetsListVC.swift in Sources */,
 			);
