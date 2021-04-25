@@ -20,25 +20,30 @@ class ModelDataProvider: ModelDataProviderProtocol {
     }
     
     private func loadBudgets() {
+        print("\(Self.self) \(#function)")
         do {
             let data = try Data(contentsOf: storeFileURL)
             arrBudgets = try JSONDecoder().decode([Budget].self, from: data)
+            print("Budget loaded")
         } catch  {
-            print("\(Self.self) \(#function)")
             print(error.localizedDescription)
         }
     }
 
     // MARK: - ModelDataProviderProtocol
-    func save(budget: Budget) {
+    func save(budget: Budget) -> Bool {
+        print("\(Self.self) \(#function)")
+
         arrBudgets.append(budget)
         do {
             let data = try JSONEncoder().encode(arrBudgets)
             try data.write(to: storeFileURL)
+            print("Budget saved")
         } catch {
-            print("\(Self.self) \(#function)")
             print(error.localizedDescription)
+            return false
         }
+        return true 
     }
     
     func budget(at i: Int) -> Budget {

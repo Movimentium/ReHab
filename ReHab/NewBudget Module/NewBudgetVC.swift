@@ -9,8 +9,7 @@ import UIKit
 
 class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSource, UIPickerViewDelegate
 {
-
-
+ 
     
     @IBOutlet weak var vwMsg: UIView!
     @IBOutlet weak var lblMsg: UILabel!
@@ -33,10 +32,7 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     @IBOutlet weak var constrVwMsgTop: NSLayoutConstraint!
     @IBOutlet weak var constrVwMsgHeight: NSLayoutConstraint!
 
-    private let btnSave = UIBarButtonItem(title: "save".localized(),
-                                          style: .plain,
-                                          target: self,
-                                          action: #selector(onBtnSave))
+    private var btnSave: UIBarButtonItem!
     private var pickerSubCategory = UIPickerView()
     private var pickerLocation = UIPickerView()
 
@@ -55,10 +51,18 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     
     private func setupUI() {
         navigationController?.setNavigationBarHidden(false, animated: false)
+        btnSave = UIBarButtonItem(title: "save".localized(),
+                                  style: .done,
+                                  target: self,
+                                  action: #selector(onBtnSave))
         navigationItem.rightBarButtonItem = btnSave
         constrVwMsgTop.constant = -constrVwMsgHeight.constant
         btnSave.isEnabled = false
         view.isUserInteractionEnabled = false
+        txtVwDescrip.layer.cornerRadius = 3
+        txtVwDescrip.layer.borderWidth = 0.5
+        txtVwDescrip.layer.borderColor = UIColor.lightGray.cgColor
+        txtVwDescrip.text = ""
         
         // Strings
         title = "newBudget".localized()
@@ -117,11 +121,31 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     
     // MARK: - IBActions
     @objc private func onBtnSave() {
+        print(#function)
         view.endEditing(true)
         if presenter.isValid(txtName.text) == false {
             return
         }
-        
+        if presenter.isValid(txtSubCategory.text) == false {
+            return
+        }
+        if presenter.isValid(txtLocation.text) == false {
+            return
+        }
+        if presenter.isValid(txtVwDescrip.text) == false {
+            return
+        }
+        if presenter.isValid(txtEmail.text, isEmail: true) == false {
+            return
+        }
+        if presenter.isValid(txtPhone.text, isEmail: false, isPhone: true) == false {
+            return
+        }
+        let t: BudgetTuple = (txtName.text!.trimmingCharacters(in:.whitespaces),
+                              txtEmail.text!.trimmingCharacters(in:.whitespaces),
+                              txtPhone.text!.trimmingCharacters(in:.whitespaces),
+                              txtVwDescrip.text.trimmingCharacters(in:.whitespacesAndNewlines))
+        presenter.save(t)
     }
 
     
@@ -139,12 +163,22 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
         pickerLocation.delegate = self
     }
     
-    func showErrorLoadingAndExit() {
-        showMsg("anErrorOcurred".localized()) {
+    
+    func showMessageAndExit(_ msg: String) {
+        view.isUserInteractionEnabled = false
+        btnSave.isEnabled = false
+        showMsg(msg) {
             self.navigationController?.popViewController(animated: true)
         }
     }
     
+    func showMessage(_ msg:String) {
+        showMsg(msg, completionHandler: nil)
+    }
+
+    func exit() {
+        navigationController?.popViewController(animated: true)
+    }
 
     // MARK: - UIPickerView methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -9,21 +9,24 @@ import UIKit
 
 protocol NewBudgetViewInterface: AnyObject {
     func didLoadDataForForm()
-    func showErrorLoadingAndExit()
+    func showMessageAndExit(_ msg:String)
+    func showMessage(_ msg:String)
     func setUserInterationEnabled(_ isEnabled:Bool)
+    func exit()
 }
 
 class NewBudgetPresenter {
 
     private weak var viewInterface: NewBudgetViewInterface?
     private let dataProvider: ModelDataProviderProtocol
+    private let validator = StringValidator()
     private let catId = "001-2" // Reformas
     
     private var arrCategories: [SubCategory] = []
     private var arrLocations: [Location] = []
     private var subCategorySelected: SubCategory?
-    private var locationSelected: SubCategory?
-    private let validator = StringValidator()
+    private var locationSelected: Location?
+   
 
     init(withViewInterface viewInterface: NewBudgetViewInterface,
          dataProv: ModelDataProviderProtocol)
@@ -36,7 +39,7 @@ class NewBudgetPresenter {
         dataProvider.getSubCategories(forParentId: catId) { [weak self] (arr:[SubCategory]) in
             if arr.isEmpty {
                 DispatchQueue.main.async {
-                    self?.viewInterface?.showErrorLoadingAndExit()
+                    self?.viewInterface?.showMessageAndExit("anErrorOcurred".localized())
                 }
             } else {
                 self?.arrCategories = arr
@@ -49,7 +52,7 @@ class NewBudgetPresenter {
         dataProvider.getLocations { [weak self] (arr:[Location]) in
             DispatchQueue.main.async {
                 if arr.isEmpty {
-                    self?.viewInterface?.showErrorLoadingAndExit()
+                    self?.viewInterface?.showMessageAndExit("anErrorOcurred".localized())
                 } else {
                     self?.arrLocations = arr
                     self?.viewInterface?.setUserInterationEnabled(true)
@@ -61,16 +64,40 @@ class NewBudgetPresenter {
     
     
     func isValid(_ str:String?, isEmail:Bool = false, isPhone:Bool = false) -> Bool {
-        
+        if validator.isValid(str) == false {
+            viewInterface?.showMessage("isEmptyMsg".localized())
+            return false
+        }
+        // str != nil && str.isEmpty == false
+        if isEmail == true {
+            if validator.isEmail(str!) == false {
+                viewInterface?.showMessage("emailNotValid".localized())
+                return false
+            }
+        } else if isPhone {
+            if validator.isPhoneNumber(str!) == false {
+                viewInterface?.showMessage("phoneNotValid".localized())
+                return false
+            }
+        }
+        return true
     }
     
-    func save() {
-        
+    func save(_ tuple:BudgetTuple) {
+        let newBudget = Budget(subCat: subCategorySelected!,
+                               location: locationSelected!)
+        newBudget.name = tuple.name
+        newBudget.email = tuple.email
+        newBudget.phoneNumber = tuple.phone
+        newBudget.descrip = tuple.descr
+        if dataProvider.save(budget: newBudget) == true {
+            viewInterface?.showMessageAndExit("saved".localized())
+        } else {
+            viewInterface?.showMessageAndExit("anErrorOcurred".localized())
+        }
+
     }
-    
-    
-    
-    
+
     // MARK: - Category methods
     var numberOfCategories: Int {
         return arrCategories.count
@@ -82,7 +109,7 @@ class NewBudgetPresenter {
     }
     
     func didSelectCategory(at i:Int) {
-        
+        subCategorySelected = arrCategories[i]
     }
     
     // MARK: - Location methods
@@ -96,6 +123,6 @@ class NewBudgetPresenter {
     }
     
     func didSelectLocation(at i:Int) {
-        
+        locationSelected = arrLocations[i]
     }
 }

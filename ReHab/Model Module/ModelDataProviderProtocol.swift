@@ -14,7 +14,7 @@ protocol ModelDataProviderProtocol {
     
     func getLocations(completion: @escaping (_ arr:[Location]) -> Void)
     
-    func save(budget: Budget)
+    func save(budget: Budget) -> Bool
     func budget(at i:Int) -> Budget
-    var numberOfBudgets: Int { get }
+     var numberOfBudgets: Int { get }
 }

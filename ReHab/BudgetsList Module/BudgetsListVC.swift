@@ -20,6 +20,11 @@ class BudgetsListVC: UIViewController, BudgetsListViewInterface, UITableViewData
         table.dataSource = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        table.reloadData()
+    }
+    
     private func setupUI() {
         title = "budgets".localized()
     }

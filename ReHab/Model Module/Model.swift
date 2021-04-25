@@ -35,6 +35,8 @@ class CategoryApiResp: Codable {
     var icon: String?
 }
 
+typealias BudgetTuple = (name:String, email:String, phone:String, descr:String)
+
 class Budget: Codable, Stringnable {
     var descrip: String = ""
     var subCategory: SubCategory
