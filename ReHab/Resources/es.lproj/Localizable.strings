@@ -13,3 +13,8 @@
 "ok" = "Ok";
 "save" = "Guardar";
 "newBudget" = "Nuevo presupuesto";
+
+// Validation msgs
+"isEmptyMsg" = "Por favor, rellene todos los campos";
+"emailNotValid" = "Formato de e-mail no válido";
+"phoneNotValid" = "Número de teléfono no válido";

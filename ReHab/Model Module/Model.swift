@@ -42,6 +42,11 @@ class Budget: Codable, Stringnable {
     var email: String = ""
     var phoneNumber: String = ""
     var location: Location
+    
+    init(subCat:SubCategory, location: Location) {
+        self.subCategory = subCat
+        self.location = location
+    }
 }
 
 class SubCategory: Codable, Stringnable, Descriptable {

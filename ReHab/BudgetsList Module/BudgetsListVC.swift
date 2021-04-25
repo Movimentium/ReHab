@@ -8,11 +8,13 @@ class BudgetsListVC: UIViewController, BudgetsListViewInterface, UITableViewData
     @IBOutlet weak var table: UITableView!
     private let idCell = String(describing: BudgetCell.self)
     
-    private let presenter = BudgetsListPresenter()
+    private var presenter: BudgetsListPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewInterface = self
+        presenter = BudgetsListPresenter(withViewInterface: self,
+                                         dataProv: ModelDataProvider())
+        
         table.register(UINib(nibName: idCell, bundle: nil), forCellReuseIdentifier: idCell)
         table.rowHeight = UITableView.automaticDimension
         table.dataSource = self
@@ -28,11 +30,8 @@ class BudgetsListVC: UIViewController, BudgetsListViewInterface, UITableViewData
         presenter.onBtnNewBudget()
     }
     
-    
     // MARK: - BudgetsListViewInterface
-    func goToNewBudgetVC() {
-        let sb = UIStoryboard(name: "NewBudget", bundle: nil)
-        let newBudgetVC = sb.instantiateInitialViewController()!
+    func push(newBudgetVC: UIViewController) {
         navigationController!.pushViewController(newBudgetVC, animated: true)
     }
     

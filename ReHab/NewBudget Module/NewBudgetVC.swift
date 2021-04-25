@@ -40,7 +40,7 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     private var pickerSubCategory = UIPickerView()
     private var pickerLocation = UIPickerView()
 
-    private var presenter: NewBudgetPresenter!
+    var presenter: NewBudgetPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +50,7 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter = NewBudgetPresenter(withViewInterface: self,
-                                       dataProv: ModelDataProvider())
+        presenter.loadSubCategories()
     }
     
     private func setupUI() {
@@ -118,14 +117,19 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     
     // MARK: - IBActions
     @objc private func onBtnSave() {
-    
+        view.endEditing(true)
+        if presenter.isValid(txtName.text) == false {
+            return
+        }
+        
     }
 
     
 
     // MARK: - NewBudgetViewInterface
     func setUserInterationEnabled(_ isEnabled: Bool) {
-          view.isUserInteractionEnabled = isEnabled
+        view.isUserInteractionEnabled = isEnabled
+        btnSave.isEnabled = true
     }
     
     func didLoadDataForForm() {

@@ -8,25 +8,35 @@
 import UIKit
 
 protocol BudgetsListViewInterface: AnyObject {
-    func goToNewBudgetVC()
+    func push(newBudgetVC:UIViewController)
 }
 
 class BudgetsListPresenter {
     
-    weak var viewInterface: BudgetsListViewInterface?
-    
-    var arrBudgets:[Budget] = []
+    private weak var viewInterface: BudgetsListViewInterface?
+    private let dataProvider: ModelDataProviderProtocol
         
+    init(withViewInterface viewInterface: BudgetsListViewInterface,
+         dataProv: ModelDataProviderProtocol)
+    {
+        self.viewInterface = viewInterface
+        self.dataProvider = dataProv
+    }
+    
     func onBtnNewBudget() {
-        viewInterface?.goToNewBudgetVC()
+        let sb = UIStoryboard(name: "NewBudget", bundle: nil)
+        let newBudgetVC = sb.instantiateInitialViewController() as! NewBudgetVC
+        newBudgetVC.presenter = NewBudgetPresenter(withViewInterface: newBudgetVC,
+                                                   dataProv: self.dataProvider)
+        viewInterface?.push(newBudgetVC: newBudgetVC)
     }
     
     var numberOfBudgets: Int {
-        return arrBudgets.count
+        return dataProvider.numberOfBudgets
     }
     
     func budget(at i:Int) -> Budget {
-        return arrBudgets[i]
+        return dataProvider.budget(at: i)
     }
     
 }

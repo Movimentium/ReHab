@@ -10,7 +10,45 @@ import Foundation
 class ModelDataProvider: ModelDataProviderProtocol {
     
     private let apiDataProv = APIDataProvider()
+    private var appDocsDirURL:URL = FileManager.default.urls(for: .documentDirectory,
+                                                              in: .userDomainMask).first!
+    private lazy var storeFileURL = appDocsDirURL.appendingPathComponent("Budgets.plist")
+    private var arrBudgets:[Budget] = []
+    
+    init() {
+        loadBudgets()
+    }
+    
+    private func loadBudgets() {
+        do {
+            let data = try Data(contentsOf: storeFileURL)
+            arrBudgets = try JSONDecoder().decode([Budget].self, from: data)
+        } catch  {
+            print("\(Self.self) \(#function)")
+            print(error.localizedDescription)
+        }
+    }
 
+    // MARK: - ModelDataProviderProtocol
+    func save(budget: Budget) {
+        arrBudgets.append(budget)
+        do {
+            let data = try JSONEncoder().encode(arrBudgets)
+            try data.write(to: storeFileURL)
+        } catch {
+            print("\(Self.self) \(#function)")
+            print(error.localizedDescription)
+        }
+    }
+    
+    func budget(at i: Int) -> Budget {
+        return arrBudgets[i]
+    }
+    
+    var numberOfBudgets: Int {
+        return arrBudgets.count
+    }
+    
     func getSubCategories(forParentId id: String, completion: @escaping ([SubCategory]) -> Void) {
         apiDataProv.getData(forEndPoint: .subCategoryList(idCat: id)) { (theData:Data?, error:Error?) in
             guard let data = theData else {

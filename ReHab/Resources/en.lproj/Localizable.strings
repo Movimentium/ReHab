@@ -1,6 +1,7 @@
 /* 
   Localizable.strings
 */
+"budgets" = "Budgets";
 
 // NewBudget Module
 "name" = "Nombre";
@@ -12,3 +13,8 @@
 "ok" = "Ok";
 "save" = "Guardar";
 "newBudget" = "Nuevo presupuesto";
+
+// Validation msgs
+"isEmptyMsg" = "Please, fill in all the fields";
+"emailNotValid" = "Invalid e-mail format";
+"phoneNotValid" = "Invalid phone nomber format";

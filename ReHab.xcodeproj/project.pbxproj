@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C12400A263608680082CEED /* StringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C124009263608680082CEED /* StringValidator.swift */; };
 		0C37FDB1263592EA00AAA7E6 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C37FDB0263592EA00AAA7E6 /* UIColorExtension.swift */; };
 		0C37FDB62635AFAE00AAA7E6 /* ModelDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C37FDB52635AFAE00AAA7E6 /* ModelDataProviderProtocol.swift */; };
 		0C37FDBA2635AFBD00AAA7E6 /* ModelDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C37FDB92635AFBD00AAA7E6 /* ModelDataProvider.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C124009263608680082CEED /* StringValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValidator.swift; sourceTree = "<group>"; };
 		0C37FDB0263592EA00AAA7E6 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0C37FDB52635AFAE00AAA7E6 /* ModelDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDataProviderProtocol.swift; sourceTree = "<group>"; };
 		0C37FDB92635AFBD00AAA7E6 /* ModelDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDataProvider.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				0C462E6A2634C75B00C41109 /* Printer.swift */,
 				0C462E6F2634C89F00C41109 /* Stringnable.swift */,
 				0C594C492635D40D00B45A3E /* Descriptable.swift */,
+				0C124009263608680082CEED /* StringValidator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				0CDC0054262E1A2300170535 /* Model.swift in Sources */,
 				0C37FDB62635AFAE00AAA7E6 /* ModelDataProviderProtocol.swift in Sources */,
 				0C37FDB1263592EA00AAA7E6 /* UIColorExtension.swift in Sources */,
+				0C12400A263608680082CEED /* StringValidator.swift in Sources */,
 				0C462E702634C89F00C41109 /* Stringnable.swift in Sources */,
 				0C462E6B2634C75C00C41109 /* Printer.swift in Sources */,
 				0CDC004E262E16B000170535 /* NewBudgetPresenter.swift in Sources */,

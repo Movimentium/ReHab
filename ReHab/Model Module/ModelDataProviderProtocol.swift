@@ -8,6 +8,13 @@
 import Foundation
 
 protocol ModelDataProviderProtocol {
-    func getSubCategories(forParentId id:String, completion: @escaping (_ arr:[SubCategory]) -> Void)
+    
+    func getSubCategories(forParentId id:String,
+                          completion: @escaping (_ arr:[SubCategory]) -> Void)
+    
     func getLocations(completion: @escaping (_ arr:[Location]) -> Void)
+    
+    func save(budget: Budget)
+    func budget(at i:Int) -> Budget
+    var numberOfBudgets: Int { get }
 }

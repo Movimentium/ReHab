@@ -21,18 +21,18 @@ class NewBudgetPresenter {
     
     private var arrCategories: [SubCategory] = []
     private var arrLocations: [Location] = []
-    
-    private var idxCategorySelected: Int?
-    private var idxLocationSelected: Int?
-    
-    
-    init(withViewInterface viewInterface: NewBudgetViewInterface, dataProv: ModelDataProviderProtocol) {
+    private var subCategorySelected: SubCategory?
+    private var locationSelected: SubCategory?
+    private let validator = StringValidator()
+
+    init(withViewInterface viewInterface: NewBudgetViewInterface,
+         dataProv: ModelDataProviderProtocol)
+    {
         self.viewInterface = viewInterface
         self.dataProvider = dataProv
-        loadSubCategories()
     }
     
-    private func loadSubCategories() {
+    func loadSubCategories() {
         dataProvider.getSubCategories(forParentId: catId) { [weak self] (arr:[SubCategory]) in
             if arr.isEmpty {
                 DispatchQueue.main.async {
@@ -57,6 +57,15 @@ class NewBudgetPresenter {
                 }
             }
         }
+    }
+    
+    
+    func isValid(_ str:String?, isEmail:Bool = false, isPhone:Bool = false) -> Bool {
+        
+    }
+    
+    func save() {
+        
     }
     
     
