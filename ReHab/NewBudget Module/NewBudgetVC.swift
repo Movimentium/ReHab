@@ -46,6 +46,10 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
         super.viewDidLoad()
         setupUI()
         setupPickers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         presenter = NewBudgetPresenter(withViewInterface: self,
                                        dataProv: ModelDataProvider())
     }
@@ -54,15 +58,19 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.rightBarButtonItem = btnSave
         constrVwMsgTop.constant = -constrVwMsgHeight.constant
+        btnSave.isEnabled = false
+        view.isUserInteractionEnabled = false
         
         // Strings
         title = "newBudget".localized()
+        lblMsg.text = nil
         lblName.text = "name".localized()
         lblEmail.text = "email".localized()
         lblPhone.text = "phone".localized()
         lblSubCategory.text = "subCategory".localized()
         lblLocation.text = "location".localized()
         lblDescription.text = "descrip".localized()
+        
     }
     
     /*
@@ -90,7 +98,24 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
      }
      */
     
-
+    private func showMsg(_ msg:String, completionHandler: VoidClosure?) {
+        lblMsg.text = msg
+        // Show vwMsg
+        constrVwMsgTop.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+        // Hide vwMsg after 1.25 segs
+        constrVwMsgTop.constant = -constrVwMsgHeight.constant
+        UIView.animate(withDuration: 0.25, delay: 1.25, options: []) {
+            self.view.layoutIfNeeded()
+        } completion: { (isEnded) in
+            if let _ = completionHandler, isEnded {
+                completionHandler!()
+            }
+        }
+    }
+    
     // MARK: - IBActions
     @objc private func onBtnSave() {
     
@@ -111,10 +136,12 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     }
     
     func showErrorLoadingAndExit() {
-         
+        showMsg("anErrorOcurred".localized()) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
-    
+
     // MARK: - UIPickerView methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

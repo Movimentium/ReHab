@@ -29,7 +29,6 @@ class NewBudgetPresenter {
     init(withViewInterface viewInterface: NewBudgetViewInterface, dataProv: ModelDataProviderProtocol) {
         self.viewInterface = viewInterface
         self.dataProvider = dataProv
-        self.viewInterface?.setUserInterationEnabled(false)
         loadSubCategories()
     }
     

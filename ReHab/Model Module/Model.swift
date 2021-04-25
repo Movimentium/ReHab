@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias VoidClosure = ()->Void
+
 class LocationApiResp: Codable {
     var id: Int
     var parent_id: Int

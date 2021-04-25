@@ -15,8 +15,18 @@ class BudgetsListPresenter {
     
     weak var viewInterface: BudgetsListViewInterface?
     
+    var arrBudgets:[Budget] = []
         
     func onBtnNewBudget() {
         viewInterface?.goToNewBudgetVC()
     }
+    
+    var numberOfBudgets: Int {
+        return arrBudgets.count
+    }
+    
+    func budget(at i:Int) -> Budget {
+        return arrBudgets[i]
+    }
+    
 }
