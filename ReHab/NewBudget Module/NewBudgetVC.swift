@@ -53,16 +53,7 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("\(self.classForCoder) \(#function)")
-        print("view.safeAreaInsets: \(view.safeAreaInsets)") //view.safeAreaInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        print("view.safeAreaLayoutGuide: \(view.safeAreaLayoutGuide)")
-        print("view.safeAreaLayoutGuide.owningView?.frame: \(String(describing: view.safeAreaLayoutGuide.owningView?.frame))")
-        print("view.safeAreaLay: \( view.safeAreaLayoutGuide.owningView!.frame.origin.y))")
-
-        print("view.insetsLayoutMarginsFromSafeArea \(view.insetsLayoutMarginsFromSafeArea)")
-
-        
+        super.viewDidAppear(animated)        
         defaultFormTop = constrFormTop.constant
         presenter.loadSubCategories()
     }
