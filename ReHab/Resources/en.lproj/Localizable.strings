@@ -4,15 +4,15 @@
 "budgets" = "Budgets";
 
 // NewBudget Module
-"name" = "Nombre";
+"name" = "Name";
 "email" = "E-mail";
-"phone" = "Teléfono";
-"subCategory" = "Subcategoría";
-"location" = "Localización";
-"descrip" = "Descripción";
+"phone" = "Phone number";
+"subCategory" = "Subcategory";
+"location" = "Location";
+"descrip" = "Description";
 "ok" = "Ok";
-"save" = "Guardar";
-"newBudget" = "Nuevo presupuesto";
+"save" = "Save";
+"newBudget" = "New budget";
 
 // Validation msgs
 "isEmptyMsg" = "Please, fill in all the fields";
