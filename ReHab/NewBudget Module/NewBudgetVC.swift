@@ -7,13 +7,15 @@
 
 import UIKit
 
-class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSource, UIPickerViewDelegate
+class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate
 {
  
     
     @IBOutlet weak var vwMsg: UIView!
     @IBOutlet weak var lblMsg: UILabel!
 
+    @IBOutlet weak var stackVw: UIStackView!
+    
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
@@ -31,7 +33,8 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
     @IBOutlet weak var constrFormTop: NSLayoutConstraint!
     @IBOutlet weak var constrVwMsgTop: NSLayoutConstraint!
     @IBOutlet weak var constrVwMsgHeight: NSLayoutConstraint!
-
+    private var defaultFormTop: CGFloat = 40
+ 
     private var btnSave: UIBarButtonItem!
     private var pickerSubCategory = UIPickerView()
     private var pickerLocation = UIPickerView()
@@ -42,11 +45,31 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
         super.viewDidLoad()
         setupUI()
         setupPickers()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChangeFrame(_:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("\(self.classForCoder) \(#function)")
+        print("view.safeAreaInsets: \(view.safeAreaInsets)") //view.safeAreaInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        print("view.safeAreaLayoutGuide: \(view.safeAreaLayoutGuide)")
+        print("view.safeAreaLayoutGuide.owningView?.frame: \(String(describing: view.safeAreaLayoutGuide.owningView?.frame))")
+        print("view.safeAreaLay: \( view.safeAreaLayoutGuide.owningView!.frame.origin.y))")
+
+        print("view.insetsLayoutMarginsFromSafeArea \(view.insetsLayoutMarginsFromSafeArea)")
+
+        
+        defaultFormTop = constrFormTop.constant
         presenter.loadSubCategories()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupUI() {
@@ -76,30 +99,45 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
         
     }
     
-    /*
-     
-     @objc private func keyboardWillChangeFrame(_ notif:Notification) {
-         guard let info = notif.userInfo,
-               let fr:CGRect = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-               let animTime = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
-         else {
-             return
-         }
-         let pntOrigin = txtBabyName.frame.origin
-         print("txtBabyName.frame.origin: \(pntOrigin)")
-         let pnt0inView = contentVw.convert(pntOrigin, to: view)
-         print("in view \(pnt0inView)")
-         if fr.origin.y >= view.bounds.height {
-             constrTopFirstLbl.constant = valConstrTopFirstLbl
-         } else if txtBabyName.isEditing {
-             constrTopFirstLbl.constant -= (fr.height - (K.h - pnt0inView.y) + txtBabyName.bounds.height + 4)
-         }
-         UIView.animate(withDuration: animTime, delay: 0,
-                        options: [], animations: {
-                         self.view.layoutIfNeeded()
-                        }, completion: nil)
-     }
-     */
+    
+    
+    @objc private func keyboardWillChangeFrame(_ notif:Notification) {
+        guard let info = notif.userInfo,
+              let frKboard:CGRect = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let animTime = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+        else {
+            return
+        }
+        print(#function)
+        var vwFirstResponder: UIView? = nil
+        for subVw in stackVw.subviews where subVw.isFirstResponder {
+            vwFirstResponder = subVw
+        }
+        if let vw = vwFirstResponder {
+            let pntOrigin = vw.frame.origin
+            print("vw.frame.origin: \(pntOrigin)")
+            var pnt0inView = stackVw.convert(pntOrigin, to: view)
+            print("pnt0inView.y:      \(pnt0inView.y)")
+            print("frKboard.origin.y: \(frKboard.origin.y)")
+            let deltaTop = view.safeAreaLayoutGuide.owningView?.frame.origin.y ?? 0
+            pnt0inView.y += deltaTop
+            if pnt0inView.y > frKboard.origin.y {
+                print("overlayed")
+                let dy = (pnt0inView.y - frKboard.origin.y) + vw.bounds.height + 4
+                constrFormTop.constant = defaultFormTop - dy
+            } else {
+                constrFormTop.constant = defaultFormTop
+            }
+        } else {
+            constrFormTop.constant = defaultFormTop
+        }
+        UIView.animate(withDuration: animTime, delay: 0,
+                       options: [], animations:
+        {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     
     private func showMsg(_ msg:String, completionHandler: VoidClosure?) {
         lblMsg.text = msg
@@ -235,15 +273,33 @@ class NewBudgetVC: UIViewController, NewBudgetViewInterface, UIPickerViewDataSou
             let i = pickerSubCategory.selectedRow(inComponent: 0)
             presenter.didSelectCategory(at: i)
             txtSubCategory.text = presenter.category(at: i)
-            txtSubCategory.resignFirstResponder()
+            txtLocation.becomeFirstResponder()
         }
         else if txtLocation.isEditing {
             let i = pickerLocation.selectedRow(inComponent: 0)
             presenter.didSelectLocation(at: i)
             txtLocation.text = presenter.location(at: i)
-            txtLocation.resignFirstResponder()
+            txtVwDescrip.becomeFirstResponder()
         }
     }
 
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ txt: UITextField) -> Bool {
+        if txt == txtName {
+            txtEmail.becomeFirstResponder()
+        } else if txt == txtEmail {
+            txtPhone.becomeFirstResponder()
+        } else if txt == txtPhone {
+            txtSubCategory.becomeFirstResponder()
+        }
+        return true
+    }
     
+    func textField(_ txt: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if txt == txtPhone && range.location == 13 {
+            return false
+        }
+        return true
+    }
 }
